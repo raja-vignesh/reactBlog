@@ -4,6 +4,7 @@ import NavBar from './components/layout/navbar';
 import {BrowserRouter,Route} from 'react-router-dom';
 import Singup from './components/auth/signup';
 import Signin from './components/auth/signin';
+import RecipeList from './components/recipes/recipeList';
 class App extends Component {
   render() {
     return (
@@ -12,6 +13,7 @@ class App extends Component {
         <NavBar/>
         <Route exact path='/signup' component={Singup}/>
         <Route exact path='/signin' component={Signin}/>
+        <Route exact path='/recipeList' component={RecipeList}/>
       </div>
       </BrowserRouter>
     );
