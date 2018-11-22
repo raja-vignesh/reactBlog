@@ -3,6 +3,8 @@ import RecipeItem from './recipeItem';
 import {connect} from 'react-redux';
 import RecipeListAction from '../../actions/recipeActions';
 import {bindActionCreators} from 'redux';
+import {firestoreConnect} from 'react-redux-firebase';
+import {compose} from 'redux';
 
 class RecipeList extends Component {
 
@@ -12,7 +14,7 @@ class RecipeList extends Component {
 
     componentDidMount() {
         console.log('componentDidMount')
-        this.props.RecipeListAction()
+        //this.props.RecipeListAction()
     }
 
     render() {
@@ -20,7 +22,7 @@ class RecipeList extends Component {
         console.log(this.props.recipes);
         return(
 
-            this.props.recipes.length > 0 ?  this.props.recipes.map(x => {
+            this.props.recipes && this.props.recipes.length > 0 ?  this.props.recipes.map(x => {
                 return <RecipeItem item={x} key={x.id}/>
             }) :  <p>Loading content</p>
         )
@@ -28,7 +30,7 @@ class RecipeList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {recipes:state.recipes}
+    return {recipes:state.firestore.ordered.recipes}
 }
 
 const mapDispatchToProps = (dispatch,props) => {
@@ -38,4 +40,9 @@ const mapDispatchToProps = (dispatch,props) => {
     }, dispatch)
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(RecipeList);
+export default compose(connect(mapStateToProps,mapDispatchToProps),firestoreConnect([{
+    collection:'recipes',
+
+}]))(RecipeList);
+
+
