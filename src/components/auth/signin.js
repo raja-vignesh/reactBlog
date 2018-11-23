@@ -1,74 +1,67 @@
 import React, { Component } from 'react';
+import {AuthActions} from '../../actions/authActions';
+import {connect} from 'react-redux';
 
 class Signin extends Component {
-constructor() {
-super();
-this.state = {
-  username: '',
-  password: '',
-  error: '',
-};
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+    };
 
-this.handlePassChange = this.handlePassChange.bind(this);
-this.handleUserChange = this.handleUserChange.bind(this);
-this.handleSubmit = this.handleSubmit.bind(this);
-this.dismissError = this.dismissError.bind(this);
+  }
+
+
+
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    console.log(this.state)
+    this.props.signin(this.state)
+  }
+
+  handleChange = (evt) => {
+    console.log(evt)
+    this.setState({
+      [evt.target.id]: evt.target.value
+    });
+  };
+
+
+
+  render() {
+
+
+    return (
+      <div className="jumbotron" style={{ background: 'transparent' }}>
+        <div className="container">
+          <form>
+            <div className="form-group row">
+              <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
+              <div className="col-sm-10">
+                <input type="email" className="form-control" id="email" placeholder="Email" onChange={this.handleChange} />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
+              <div className="col-sm-10">
+                <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} />
+              </div>
+            </div>
+            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Signin</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
-dismissError() {
-this.setState({ error: '' });
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signin: (creds) => dispatch(AuthActions(creds))
+  }
 }
 
-handleSubmit(evt) {
-evt.preventDefault();
 
-if (!this.state.username) {
-  return this.setState({ error: 'Username is required' });
-}
-
-if (!this.state.password) {
-  return this.setState({ error: 'Password is required' });
-}
-
-return this.setState({ error: '' });
-}
-
-handleUserChange(evt) {
-this.setState({
-  username: evt.target.value,
-});
-};
-
-handlePassChange(evt) {
-this.setState({
-  password: evt.target.value,
-});
-}
-
-render() {
-
-
-return (
-  <div className="signin">
-    <form onSubmit={this.handleSubmit}>
-      {
-        this.state.error &&
-        <h3 data-test="error" onClick={this.dismissError}>
-          <button onClick={this.dismissError}>✖</button>
-          {this.state.error}
-        </h3>
-      }
-      <label>User Name</label>
-      <input type="text" data-test="username" value={this.state.username} onChange={this.handleUserChange} />
-
-      <label>Password</label>
-      <input type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} />
-
-      <input type="submit" value="Log In" data-test="submit" />
-    </form>
-  </div>
-);
-}
-}
-
-export default Signin;
+export default connect(null,mapDispatchToProps)(Signin);

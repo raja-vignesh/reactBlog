@@ -5,6 +5,7 @@ import {BrowserRouter,Route} from 'react-router-dom';
 import Singup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import RecipeList from './components/recipes/recipeList';
+import CreateRecipe from './components/recipes/createRecipe';
 class App extends Component {
   render() {
     return (
@@ -14,6 +15,7 @@ class App extends Component {
         <Route exact path='/signup' component={Singup}/>
         <Route exact path='/signin' component={Signin}/>
         <Route exact path='/recipeList' component={RecipeList}/>
+        <Route exact path='/createRecipe' component={CreateRecipe}/>
       </div>
       </BrowserRouter>
     );
