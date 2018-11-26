@@ -8,7 +8,7 @@ class Signin extends Component {
     this.state = {
       email: '',
       password: '',
-    };
+    }
 
   }
 
@@ -31,7 +31,6 @@ class Signin extends Component {
 
 
   render() {
-
 
     return (
       <div className="jumbotron" style={{ background: 'transparent' }}>
@@ -63,5 +62,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+const mapStateToProps = (state,props) => {
+  return {
+      authError:state.auth.authError,
+      auth:state.firebase.auth.uid
+  }
+}
 
-export default connect(null,mapDispatchToProps)(Signin);
+
+export default connect(mapStateToProps,mapDispatchToProps)(Signin);

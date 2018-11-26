@@ -25,6 +25,8 @@ class SignUp extends Component {
     }
 
     render () {
+        const {authError,auth} = this.props;
+        
     return (
         <div className="jumbotron" style={{background:'transparent'}}>
         <div className="container">
@@ -66,5 +68,10 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 
-
-  export default connect(null,mapDispatchToProps)(SignUp);
+  const mapStateToProps = (state,props) => {
+    return {
+        authError:state.auth.authError,
+        auth:state.firebase.auth
+    }
+  }
+  export default connect(mapStateToProps,mapDispatchToProps)(SignUp);

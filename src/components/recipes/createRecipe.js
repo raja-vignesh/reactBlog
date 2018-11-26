@@ -34,7 +34,7 @@ class CreateRecipe extends Component {
 
   render() {
 
-
+    console.log('render it again!!')
     return (
       <div className="jumbotron" style={{ background: 'transparent' }}>
         <div className="container">

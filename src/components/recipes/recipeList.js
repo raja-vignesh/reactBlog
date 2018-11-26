@@ -5,6 +5,7 @@ import RecipeListAction from '../../actions/recipeActions';
 import {bindActionCreators} from 'redux';
 import {firestoreConnect} from 'react-redux-firebase';
 import {compose} from 'redux';
+import {Redirect} from 'react-router-dom';
 
 class RecipeList extends Component {
 
@@ -18,6 +19,12 @@ class RecipeList extends Component {
     }
 
     render() {
+        console.log(this.props);
+        const {projects} = this.props;
+        const {auth} = this.props;
+        console.log('uid')
+        console.log(auth.uid)
+        if (!auth.uid) return <Redirect to='/signin'/>
         console.log('render')
         console.log(this.props.recipes);
         return(
@@ -30,7 +37,7 @@ class RecipeList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {recipes:state.firestore.ordered.recipes}
+    return {recipes:state.firestore.ordered.recipes,auth:state.firebase.auth}
 }
 
 const mapDispatchToProps = (dispatch,props) => {
