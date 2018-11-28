@@ -9,13 +9,13 @@ const AddRecipe = (recipe) => {
     console.log('Add Recipe')
     return (dispatch,state,{getFirebase,getFirestore}) => {
         const firestore = getFirestore()
-        //const profile = state().firebase.profile;
+        const profile = state().firebase.profile;
         //const authorId = state().firebase.auth; 
         console.log('Add Recipe')
         firestore.collection('recipes').add({
             ...recipe,
-            authorForeame:'test',
-            authorSurname:'testing',
+            authorForeame:profile.firstName,
+            authorSurname:profile.lastName,
             createdAt:new Date(),
         }).then( () =>
              dispatch({type:'CREATE_RECIPE',recipe})
