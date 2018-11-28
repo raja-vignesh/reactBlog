@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {signupActions} from '../../actions/authActions';
+import {Redirect} from 'react-router-dom';
 
 class SignUp extends Component {
 
@@ -26,7 +27,7 @@ class SignUp extends Component {
 
     render () {
         const {authError,auth} = this.props;
-        
+        if (auth.uid)  return <Redirect to='/'/>
     return (
         <div className="jumbotron" style={{background:'transparent'}}>
         <div className="container">

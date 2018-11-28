@@ -21,6 +21,8 @@ class CreateRecipe extends Component {
 
     console.log(this.state)
     this.props.addRecipe(this.state)
+    this.props.history.push('/');
+
   }
 
   handleChange = (evt) => {

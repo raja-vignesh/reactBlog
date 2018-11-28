@@ -12,7 +12,7 @@ const SignedInLinks = (props) => {
                 <Link to = '/' className="nav-link">Recipes List</Link>
             </li>
             <li className="nav-item">
-                <a onClick={props.signout}>Logout</a>
+                <a class="nav-link" onClick={props.signout}>Logout</a>
             </li>
             <li className="nav-item">
                 <Link to = '/' className="btn btn-floating btn-circle btn-xl btn-danger">XX</Link>
