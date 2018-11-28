@@ -34,7 +34,7 @@ class Signin extends Component {
   render() {
     const {authError,auth} = this.props;
     if (auth)  return <Redirect to='/'/>
-
+    console.log(authError)
     return (
       <div className="jumbotron" style={{ background: 'transparent' }}>
         <div className="container">
@@ -53,6 +53,9 @@ class Signin extends Component {
             </div>
             <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Signin</button>
           </form>
+          {
+            authError != null ? <p> {authError.message} </p> : null
+          }
         </div>
       </div>
     );

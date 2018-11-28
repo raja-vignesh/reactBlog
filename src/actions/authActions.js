@@ -49,7 +49,7 @@ export const signupActions = (user) => {
             dispatch({type:'USER_CREATION_SUCCESS'})
         }).catch ((err) => {
             console.log(err)
-            dispatch({type:'USER_CREATION_Failed',err});
+            dispatch({type:'USER_CREATION_FAILED',err});
         })
     })
 }

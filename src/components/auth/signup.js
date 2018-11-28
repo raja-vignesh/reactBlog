@@ -27,6 +27,7 @@ class SignUp extends Component {
 
     render () {
         const {authError,auth} = this.props;
+        console.log(authError)
         if (auth.uid)  return <Redirect to='/'/>
     return (
         <div className="jumbotron" style={{background:'transparent'}}>
@@ -58,6 +59,9 @@ class SignUp extends Component {
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
             </form>
+            {
+                authError != null ? <p> {authError.message} </p> : null
+          }
         </div>
         </div>
     )}

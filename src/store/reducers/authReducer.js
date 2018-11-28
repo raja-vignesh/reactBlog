@@ -14,6 +14,7 @@ const AuthReducer = (state = initialState,action) => {
              }
         case 'USER_CREATION_FAILED':
             console.log('USER_CREATION_FAILED')
+            console.log(action.err)
              return {
                  ...state,authError:action.err
         }
@@ -21,7 +22,7 @@ const AuthReducer = (state = initialState,action) => {
             return {
             ...state,authError:null
         }
-        case 'LOGIN_FAILURE':
+        case 'LOGIN_ERROR':
             return {
             ...state,authError:action.err
         }
